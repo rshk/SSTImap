@@ -4,15 +4,19 @@ import sys
 import traceback
 from pathlib import Path
 
+import sstimap
+import sstimap.data_types
+import sstimap.plugins
+
 from .core import checks
 from .core.interactive import InteractiveShell
 from .utils import cliparser
 from .utils.config import config_args, version
 from .utils.loggers import log
 
-PROJECT_ROOT = Path(__file__).resolve().parent
-PLUGINS_DIR = PROJECT_ROOT / "plugins"
-DATA_TYPES_DIR = PROJECT_ROOT / "data_types"
+PROJECT_ROOT = Path(sstimap.__file__).resolve().parent
+PLUGINS_DIR = Path(sstimap.plugins.__file__).resolve().parent
+DATA_TYPES_DIR = Path(sstimap.data_types.__file__).resolve().parent
 
 
 def main():
@@ -67,27 +71,35 @@ def main():
         checks.scan_website(args)
 
 
-def load_plugins():
+def autoload_modules(path: Path, root: Path):
+    """
+    Load all Python modules found in a given path
+    """
     importlib.invalidate_caches()
-    groups = os.scandir(PLUGINS_DIR)
-    groups = filter(lambda x: x.is_dir(), groups)
-    for g in groups:
-        modules = os.scandir(PLUGINS_DIR / g.name)
-        modules = filter(
-            lambda x: (x.name.endswith(".py") and not x.name.startswith("_")), modules
-        )
-        for m in modules:
-            importlib.import_module(f"plugins.{g.name}.{m.name[:-3]}")
+
+    for item in path.rglob("*.py"):
+        path_parts = str(item.relative_to(root)).split("/")
+        path_parts[-1] = path_parts[-1][:-len(item.suffix)]  # strip file suffix
+
+        # Skip hidden directories and _private modules
+        if any(_is_hidden_module(p) for p in path_parts):
+            continue
+
+        module_name = ".".join(path_parts)
+        importlib.import_module(module_name)
+
+
+def _is_hidden_module(name: str):
+    return name.startswith((".", "_"))
+
+
+
+def load_plugins():
+    autoload_modules(PLUGINS_DIR, PROJECT_ROOT.parent)
 
 
 def load_data_types():
-    importlib.invalidate_caches()
-    modules = os.scandir(DATA_TYPES_DIR)
-    modules = filter(
-        lambda x: (x.name.endswith(".py") and not x.name.startswith("_")), modules
-    )
-    for m in modules:
-        importlib.import_module(f"data_types.{m.name[:-3]}")
+    autoload_modules(DATA_TYPES_DIR, PROJECT_ROOT.parent)
 
 
 if __name__ == "__main__":
