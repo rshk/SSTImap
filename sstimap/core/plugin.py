@@ -93,23 +93,28 @@ class Plugin(object):
 
     def __init_subclass__(cls, **kwargs):
         module = cls.__module__.split(".")
-        if module[0] == "plugins":
-            if config.compare_versions(cls.sstimap_version, config.min_version['plugin']) == "<":
-                log.log(22, f'''{cls.__name__} plugin is outdated and cannot be loaded''')
-                log.log(29, f"{cls.__name__} made for version {cls.sstimap_version}, "
-                            f"expected {config.min_version['plugin']} - {config.version}")
-                failed_plugins.append(cls)
-                return
-            if config.compare_versions(cls.sstimap_version, config.version) == ">":
-                log.log(22, f'''{cls.__name__} plugin requires SSTImap update and cannot be loaded''')
-                log.log(29, f"{cls.__name__} made for version {cls.sstimap_version}, "
-                            f"expected {config.min_version['plugin']} - {config.version}")
-                failed_plugins.append(cls)
-                return
-            if module[1] in loaded_plugins:
-                loaded_plugins[module[1]].append(cls)
-            else:
-                loaded_plugins[module[1]] = [cls]
+        assert module[0] == "sstimap"
+        assert module[1] == "plugins"
+
+        grp_name = module[2]
+        # plugin_name = ".".join(module[3:])
+
+        if config.compare_versions(cls.sstimap_version, config.min_version['plugin']) == "<":
+            log.log(22, f'''{cls.__name__} plugin is outdated and cannot be loaded''')
+            log.log(29, f"{cls.__name__} made for version {cls.sstimap_version}, "
+                        f"expected {config.min_version['plugin']} - {config.version}")
+            failed_plugins.append(cls)
+            return
+
+        if config.compare_versions(cls.sstimap_version, config.version) == ">":
+            log.log(22, f'''{cls.__name__} plugin requires SSTImap update and cannot be loaded''')
+            log.log(29, f"{cls.__name__} made for version {cls.sstimap_version}, "
+                        f"expected {config.min_version['plugin']} - {config.version}")
+            failed_plugins.append(cls)
+            return
+
+        loaded_plugins.setdefault(grp_name, [])
+        loaded_plugins[grp_name].append(cls)
 
     def language_init(self):
         # To be overridden. This can call self.update_actions

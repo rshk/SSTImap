@@ -44,7 +44,11 @@ class DataType(object):
 
     def __init_subclass__(cls, **kwargs):
         module = cls.__module__.split(".")
+        assert module[0] == "sstimap"
+        assert module[1] == "data_types"
+
         name = cls.__name__
+
         if config.compare_versions(cls.sstimap_version, config.min_version['data_type']) == "<":
             log.log(22, f'''{name} data type is outdated and cannot be loaded''')
             failed_data_types.append(cls)
@@ -53,8 +57,8 @@ class DataType(object):
             log.log(22, f'''{name} data type requires SSTImap update and cannot be loaded''')
             failed_data_types.append(cls)
             return
-        if module[0] == "data_types":
-            loaded_data_types[name.lower()] = cls
+
+        loaded_data_types[name.lower()] = cls
 
     def injection_points(self, data, all_injectable=False):
         return []
