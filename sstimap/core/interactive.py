@@ -2,14 +2,14 @@ import cmd
 import json
 import os
 
-from utils import config
-from utils.loggers import log, no_colour
+from ..utils import config
+from ..utils.loggers import log, no_colour
 from urllib import parse
-from core import checks
-from core.channel import Channel
-from core.clis import Shell, MultilineShell
-from core.tcpserver import TcpServer
-from core.tcpclient import TcpClient
+from . import checks
+from .channel import Channel
+from .clis import Shell, MultilineShell
+from .tcpserver import TcpServer
+from .tcpclient import TcpClient
 import socket
 
 
@@ -357,17 +357,17 @@ Exploitation:
             log.log(24, f'Crawling depth is set to {line}.')
         else:
             log.log(24, 'Crawling disabled.')
-        
+
     def do_exclude(self, line):
         self.sstimap_options['crawl_exclude'] = line
         if line:
             log.log(24, f'Crawler exclude RegEx is set to "{line}".')
         else:
             log.log(24, 'Crawler exclude RegEx disabled.')
-    
+
     do_crawl_exclude = do_exclude
     do_crawlexclude = do_exclude
-        
+
     def do_forms(self, line):
         overwrite = not self.sstimap_options['forms']
         log.log(24, f'Form detection {"en" if overwrite else "dis"}abled.')

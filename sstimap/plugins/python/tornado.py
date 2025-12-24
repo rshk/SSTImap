@@ -1,5 +1,5 @@
-from plugins.languages import python
-from utils import rand
+from ..languages import python
+from ...utils import rand
 
 
 class Tornado(python.Python):
@@ -19,7 +19,7 @@ class Tornado(python.Python):
             "Github: https://github.com/tornadoweb/tornado/blob/master/tornado/template.py",
         ],
     }
-    
+
     def init(self):
 
         self.update_actions({
@@ -60,4 +60,3 @@ class Tornado(python.Python):
             # Comment blocks
             {'level': 5, 'prefix': '#}}', 'suffix': '{#'},
         ])
-

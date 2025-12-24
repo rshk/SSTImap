@@ -2,13 +2,13 @@ import json
 import os
 from urllib import parse
 import socket
-from utils.loggers import log
-from core.clis import Shell, MultilineShell
-from core.tcpserver import TcpServer
-from core.tcpclient import TcpClient
-from utils.crawler import crawl, find_forms
-from core.channel import Channel
-from core.matcher import profile
+from ..utils.loggers import log
+from .clis import Shell, MultilineShell
+from .tcpserver import TcpServer
+from .tcpclient import TcpClient
+from ..utils.crawler import crawl, find_forms
+from .channel import Channel
+from .matcher import profile
 
 
 def module_info(line):

@@ -1,4 +1,4 @@
-from core.data_type import DataType
+from ..core.data_type import DataType
 from urllib import parse
 from copy import deepcopy
 

@@ -1,6 +1,6 @@
-from plugins.languages import php
-from utils import rand
-from core import bash
+from ..languages import php
+from ...utils import rand
+from ...core import bash
 
 
 class Smarty(php.Php):

@@ -1,7 +1,7 @@
-from core.data_type import DataType
+from ..core.data_type import DataType
 import json
 from copy import deepcopy
-from utils.loggers import log
+from ..utils.loggers import log
 from functools import reduce
 
 

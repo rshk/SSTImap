@@ -1,7 +1,7 @@
-from core import bash
-from utils import closures
-from core.plugin import Plugin
-from utils import rand
+from ...core import bash
+from ...utils import closures
+from ...core.plugin import Plugin
+from ...utils import rand
 
 
 class Javascript(Plugin):
@@ -59,7 +59,7 @@ class Javascript(Plugin):
                 'call': 'render',
                 'execute': """require('child_process').execSync(Buffer('{code_b64p}', 'base64').toString())""",
                 'test_cmd': bash.os_print.format(s1=rand.randstrings[2]),
-                'test_cmd_expected': rand.randstrings[2] 
+                'test_cmd_expected': rand.randstrings[2]
             },
             'execute_boolean': {
                 'call': 'evaluate_blind',
@@ -137,4 +137,3 @@ ctx_closures = {
             closures.close_function + closures.close_list + closures.empty,
         ],
 }
-

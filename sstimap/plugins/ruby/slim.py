@@ -1,5 +1,5 @@
-from plugins.languages import ruby
-from utils import rand
+from ..languages import ruby
+from ...utils import rand
 
 
 class Slim(ruby.Ruby):

@@ -1,7 +1,7 @@
-from core import bash
-from core.plugin import Plugin
-from utils import closures
-from utils import rand
+from ...core import bash
+from ...core.plugin import Plugin
+from ...utils import closures
+from ...utils import rand
 
 
 class Php(Plugin):

@@ -1,7 +1,7 @@
-from core.plugin import Plugin
-from core import bash
-from utils import closures
-from utils import rand
+from ...core.plugin import Plugin
+from ...core import bash
+from ...utils import closures
+from ...utils import rand
 import re
 
 

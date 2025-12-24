@@ -1,7 +1,7 @@
-from utils.loggers import log
-from plugins.languages import javascript
-from utils import rand
-from core import bash
+from ...utils.loggers import log
+from ..languages import javascript
+from ...utils import rand
+from ...core import bash
 
 
 class Dust(javascript.Javascript):

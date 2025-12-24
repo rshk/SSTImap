@@ -1,7 +1,7 @@
 import threading
 import socket
 import sys
-from utils.loggers import log
+from ..utils.loggers import log
 
 
 class TcpClient:
@@ -45,4 +45,3 @@ class TcpClient:
         while t.is_alive():
             t.join(timeout=self.timeout)
         log.log(21, 'Exiting bind shell 2')
-

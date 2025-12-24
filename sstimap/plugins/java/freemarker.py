@@ -1,5 +1,5 @@
-from utils import rand
-from plugins.languages import java
+from ...utils import rand
+from ..languages import java
 
 
 class Freemarker(java.Java):
@@ -99,4 +99,3 @@ class Freemarker(java.Java):
             {'level': 5, 'prefix': '-->', 'suffix': '<#--'},
             {'level': 5, 'prefix': '{closure} as a></#list><#list [1] as a>', 'suffix': '', 'closures': java.ctx_closures},
         ])
-

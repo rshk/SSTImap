@@ -1,8 +1,8 @@
 from datetime import timedelta
 import random
 
-from utils import rand
-from utils.loggers import log
+from ..utils import rand
+from ..utils.loggers import log
 
 
 def vector(response):

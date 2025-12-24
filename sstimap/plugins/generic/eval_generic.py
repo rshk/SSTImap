@@ -1,7 +1,7 @@
-from core.plugin import Plugin
-from utils import closures
-from utils import rand
-from utils.loggers import log
+from ...core.plugin import Plugin
+from ...utils import closures
+from ...utils import rand
+from ...utils.loggers import log
 
 
 class Eval_generic(Plugin):

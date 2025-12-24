@@ -1,15 +1,14 @@
 import time
-from datetime import timedelta
 
 import requests
 import urllib3
 import urllib3.exceptions
 
-from utils.loggers import log
-from core.matcher import vector
+from ..utils.loggers import log
+from .matcher import vector
 from urllib import parse
 from copy import deepcopy
-from utils.random_agent import get_agent
+from ..utils.random_agent import get_agent
 
 
 class Channel:
@@ -45,7 +44,7 @@ class Channel:
         self._parse_method()
         if not self.args.get('verify_ssl'):
             urllib3.disable_warnings()
-        
+
     def _parse_method(self):
         if self.args.get('method'):
             self.http_method = self.args.get('method')
@@ -108,7 +107,7 @@ class Channel:
             if injs:
                 self.injs.extend(injs)
                 self.post_params = self.data_type.get_params()
-            
+
     def _parse_get(self, all_injectable=False):
         params_dict_list = parse.parse_qs(parse.urlsplit(self.url).query, keep_blank_values=True)
         for param, value_list in params_dict_list.items():
@@ -118,7 +117,7 @@ class Channel:
             for idx, value in enumerate(value_list):
                 if self.tag in value or all_injectable:
                     self.injs.append({'field': 'Query', 'part': 'value', 'param': param, 'value': value, 'idx': idx})
-            
+
     def req(self, injection):
         get_params = deepcopy(self.get_params)
         post_params = self.data_type.get_params()

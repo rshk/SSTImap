@@ -1,5 +1,5 @@
 import socket
-from utils.loggers import log
+from ..utils.loggers import log
 import sys
 import select
 

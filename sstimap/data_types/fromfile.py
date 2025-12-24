@@ -1,6 +1,6 @@
-from core.data_type import DataType
+from ..core.data_type import DataType
 from copy import deepcopy
-from utils.loggers import log
+from ..utils.loggers import log
 
 
 class FromFile(DataType):

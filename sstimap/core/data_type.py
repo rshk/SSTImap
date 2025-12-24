@@ -1,7 +1,7 @@
 import base64
 import sys
-from utils import config
-from utils.loggers import log
+from ..utils import config
+from ..utils.loggers import log
 
 loaded_data_types = {}
 failed_data_types = []

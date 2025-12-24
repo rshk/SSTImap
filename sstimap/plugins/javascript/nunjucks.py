@@ -1,5 +1,5 @@
-from plugins.languages import javascript
-from utils import rand
+from ..languages import javascript
+from ...utils import rand
 
 
 class Nunjucks(javascript.Javascript):

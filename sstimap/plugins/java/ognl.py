@@ -1,5 +1,5 @@
-from plugins.languages import java
-from utils import rand
+from ..languages import java
+from ...utils import rand
 
 
 class OGNL(java.Java):

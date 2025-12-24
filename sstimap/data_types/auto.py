@@ -1,7 +1,7 @@
-from core.data_type import DataType, loaded_data_types
+from ..core.data_type import DataType, loaded_data_types
 from urllib import parse
 import json
-from utils.loggers import log
+from ..utils.loggers import log
 
 
 class Auto(DataType):

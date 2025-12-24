@@ -1,5 +1,5 @@
-from plugins.languages import javascript
-from utils import rand
+from ..languages import javascript
+from ...utils import rand
 
 
 class Dot(javascript.Javascript):
@@ -75,4 +75,3 @@ class Dot(javascript.Javascript):
             {'level': 0},
             {'level': 1, 'prefix': '{closure};}}}}', 'suffix': '{{1;', 'closures': javascript.ctx_closures},
         ])
-        

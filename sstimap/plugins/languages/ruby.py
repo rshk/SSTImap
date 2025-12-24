@@ -1,6 +1,6 @@
-from core.plugin import Plugin
-from core import bash
-from utils import rand
+from ...core.plugin import Plugin
+from ...core import bash
+from ...utils import rand
 
 
 class Ruby(Plugin):

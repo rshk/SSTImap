@@ -1,7 +1,7 @@
-from utils.strings import chunk_seq, md5
-from utils import rand, config
-from utils.loggers import log
-from core.matcher import match
+from ..utils.strings import chunk_seq, md5
+from ..utils import rand, config
+from ..utils.loggers import log
+from .matcher import match
 import re
 import itertools
 import base64
@@ -79,7 +79,7 @@ class Plugin(object):
         # tune the average response time for blind values.
         # Estimate 0.5s for a safe start.
         self.render_req_tm = collections.deque([0.5], maxlen=5)
-        # The delay fortime-based blind injection. This will be added 
+        # The delay fortime-based blind injection. This will be added
         # to the average response time for render values.
         self.tm_delay = self.channel.args.get('time_based_blind_delay', 4)
         self.tm_verify_delay = self.channel.args.get('time_based_verify_blind_delay', 30)
@@ -526,13 +526,13 @@ class Plugin(object):
 
     """
     Inject the rendered payload and get the result.
-    
+
     The request is composed by parameters from:
-    
+
         - Already rendered passed **kwargs, or
         - self.get() to be rendered, or
         - self.actions.get() to be rendered
-        
+
     """
     def render(self, code, **kwargs):
         error = kwargs.get('error', self.get('error', False))
@@ -623,7 +623,7 @@ class Plugin(object):
 
     def get(self, key, default=None):
         return self.channel.data.get(key, default)
-        
+
     def delete(self, key):
         if key in self.channel.data:
             del self.channel.data[key]

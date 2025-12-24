@@ -1,5 +1,5 @@
-from plugins.languages import python
-from utils import rand
+from ..languages import python
+from ...utils import rand
 
 
 class Mako(python.Python):

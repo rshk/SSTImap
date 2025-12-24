@@ -1,6 +1,6 @@
-from plugins.languages import php
-from core import bash
-from utils import rand
+from ..languages import php
+from ...core import bash
+from ...utils import rand
 
 
 class Twig(php.Php):

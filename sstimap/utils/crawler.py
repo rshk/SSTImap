@@ -6,12 +6,13 @@ See the file 'LICENSE' for copying permission
 import re
 import time
 import urllib
+import urllib.parse
 import urllib3
 import html
 import requests
 
-from utils.loggers import log
-from utils.random_agent import get_agent
+from .loggers import log
+from .random_agent import get_agent
 
 CRAWL_EXCLUDE_EXTENSIONS = (
     "3ds", "3g2", "3gp", "7z", "DS_Store", "a", "aac", "adp", "ai", "aif", "aiff", "apk", "ar", "asf", "au", "avi", "bak",
@@ -111,7 +112,7 @@ def crawl(targets, args):
                             if re.search(r"\A[^?]+\.(?P<result>\w+)(\?|\Z)", url).group("result").lower() in CRAWL_EXCLUDE_EXTENSIONS:
                                 continue
                         except AttributeError:      # for extensionless urls
-                            pass 
+                            pass
                         if url:
                             host = urllib.parse.urlparse(url).netloc.split(":")[0]
                             if url in visited or url in worker[curr_depth] or url in worker[curr_depth + 1]:
