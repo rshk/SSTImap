@@ -56,3 +56,4 @@ node_modules
 # tags
 tags
 .idea/
+/.python-version

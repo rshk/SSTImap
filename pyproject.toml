@@ -1,0 +1,19 @@
+[project]
+name = "sstimap"
+version = "0.1.0"
+description = "Automatic SSTI detection tool with interactive interface"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "argparse>=1.4.0",
+    "html5lib>=1.1",
+    "mechanize>=0.4.10",
+    "requests>=2.32.5",
+    "urllib3>=2.6.2",
+]
+
+[project.scripts]
+sstimap = "sstimap.cli:main"
+
+[tool.uv]
+package = true
