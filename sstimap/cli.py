@@ -19,10 +19,13 @@ def main():
     args = vars(cliparser.options)
     args = config_args(args)
     args["version"] = version
-    from .utils.loggers import formatter, no_colour
+    from .utils.loggers import no_colour, setup_logging
 
-    formatter.colour = args.get("colour", True)
-    if formatter.colour:
+    is_color_enabled = args.get("colour", True)
+
+    setup_logging(color=is_color_enabled)
+
+    if is_color_enabled:
         print(cliparser.banner())
     else:
         print(no_colour(cliparser.banner()))
@@ -66,10 +69,10 @@ def main():
 
 def load_plugins():
     importlib.invalidate_caches()
-    groups = os.scandir(f"{sys.path[0]}/plugins")
+    groups = os.scandir(PLUGINS_DIR)
     groups = filter(lambda x: x.is_dir(), groups)
     for g in groups:
-        modules = os.scandir(f"{sys.path[0]}/plugins/{g.name}")
+        modules = os.scandir(PLUGINS_DIR / g.name)
         modules = filter(
             lambda x: (x.name.endswith(".py") and not x.name.startswith("_")), modules
         )
@@ -79,7 +82,7 @@ def load_plugins():
 
 def load_data_types():
     importlib.invalidate_caches()
-    modules = os.scandir(f"{sys.path[0]}/data_types")
+    modules = os.scandir(DATA_TYPES_DIR)
     modules = filter(
         lambda x: (x.name.endswith(".py") and not x.name.startswith("_")), modules
     )

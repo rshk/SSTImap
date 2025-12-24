@@ -1,6 +1,6 @@
 import logging
-import sys
 import logging.handlers
+import sys
 
 SUCCESS = 21
 FAIL = 22
@@ -9,15 +9,15 @@ POSITIVE = 24
 NEGATIVE = 25
 MINOR = 26
 
-
-log = None
-logfile = None
 logging.addLevelName(SUCCESS, "SUCCESS")
 logging.addLevelName(FAIL, "FAIL")
 logging.addLevelName(MAJOR, "MAJOR")
 logging.addLevelName(POSITIVE, "POSITIVE")
 logging.addLevelName(NEGATIVE, "NEGATIVE")
 logging.addLevelName(MINOR, "MINOR")
+
+
+log = logging.getLogger("log")
 
 
 def no_colour(s):
@@ -51,8 +51,9 @@ class SSTImapFormatter(logging.Formatter):
         "DEFAULT": "\033[91m[{levelname}]\033[0m {message}",
     }
 
-    def __init__(self):
+    def __init__(self, colour: bool = True):
         super().__init__(style="{")
+        self.colour = colour
 
     def format(self, record):
         super().__init__(
@@ -64,8 +65,8 @@ class SSTImapFormatter(logging.Formatter):
         return res
 
 
-def setup_logging(logfile: str | None = None):
-    formatter = SSTImapFormatter()
+def setup_logging(color: bool = True, logfile: str | None = None):
+    formatter = SSTImapFormatter(colour=color)
 
     stream_handler = logging.StreamHandler(stream=sys.stdout)
     stream_handler.setFormatter(formatter)
@@ -93,6 +94,3 @@ def setup_logging(logfile: str | None = None):
         file_handler.setLevel(logging.INFO)
         log.addHandler(file_handler)
         dlog.addHandler(file_handler)
-
-
-setup_logging()
